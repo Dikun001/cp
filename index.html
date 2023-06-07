@@ -1,0 +1,63 @@
+<?php 
+$k=1;
+?> 
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <title>Dashboard</title>
+</head>
+<body class="bg-dark">
+    <div class="container"> 
+        <div class="row mt-5">
+            <div class="col">
+                <div class= "card mt-5">
+                    <div class="card-header">
+                        <h2 class="display-6 text-center">Rescue Team Priority List</h2>
+                    </div>
+                    <div class="card-body">
+                        <table class = "table table-bordered text-center">
+                            <tr class="bg-dark text-white">
+                                <td> Serial </td>
+                                <td> Person ID </td>
+                                <td> Water Temperature (deg) </td>
+                                <td> Body Temperature (deg) </td>
+                                <!--<td> Blood Oxygen </td>-->
+                                <td> Heart Rate (bpm) </td>
+                                <td> Status (alive/dead) </td>
+                                <td> Location (Lat., Long.)</td>
+                            </tr>
+                            <?php 
+                                while($rows=mysqli_fetch_assoc($result)) { 
+                            ?> 
+                                <tr> 
+                                <?php 
+                                $personId = $rows['person_id'];
+                                $status = $rows['heart_rate']; 
+                                ?>
+                                    <td><?php echo $k++; ?></td>
+                                    <td><?php echo $rows['person_id']; ?></td> 
+                                    <td><?php echo $rows['water_temp']; ?></td> 
+                                    <td><?php echo $rows['body_temp']; ?></td> 
+                                    <td><?php echo $rows['heart_rate']; ?></td>
+                                    <td><div style="width: 50px; height: 15px; background-color: <?php echo $color; ?>; margin: auto;"></div></td>
+                                    <!--<td><?php echo $rows['sum']; ?></td>-->
+                                    <td><a href="https://www.google.com/maps/search/?api=1&query=<?php echo $rows['location']; ?>"><?php echo $rows['location']; ?></a></td>
+                                    
+                                </tr> 
+                            <?php 
+                                } 
+                            ?> 
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
